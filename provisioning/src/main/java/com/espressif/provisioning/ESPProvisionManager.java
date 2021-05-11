@@ -345,7 +345,7 @@ public class ESPProvisionManager {
     public static String prepareScannedData(String scannedData) {
         String preparedString = null;
         try {
-            jsonObject = new JSONObject(scannedData);
+            new JSONObject(scannedData);
             preparedString = scannedData;
         } catch (JSONException e) {
             int indexComma = -1;
