@@ -257,10 +257,8 @@ public class ESPProvisionManager {
                 if (!TextUtils.isEmpty(scannedData) && !isScanned) {
 
                     Log.d(TAG, "QR Code Data : " + scannedData);
-                    System.out.println("TEST scannedData : "+scannedData);
 
                     scannedData = prepareScannedData(scannedData);
-                    System.out.println("TEST 2 scannedData : "+scannedData);
 
                     try {
                         JSONObject jsonObject = new JSONObject(scannedData);
@@ -342,6 +340,13 @@ public class ESPProvisionManager {
         });
     }
 
+    /**
+     * This handles our malformed, pre-production JSON
+     * Replaces the comma(,) after "ver" with a colon(:)
+     *
+     * @param scannedData
+     * @return
+     */
     public static String prepareScannedData(String scannedData) {
         String preparedString = null;
         try {
@@ -349,7 +354,6 @@ public class ESPProvisionManager {
             preparedString = scannedData;
         } catch (JSONException e) {
             preparedString = scannedData.replaceFirst(",", ":");
-            System.out.println("TEST preparedString "+preparedString);
         }
         return preparedString;
     }
