@@ -348,23 +348,7 @@ public class ESPProvisionManager {
             new JSONObject(scannedData);
             preparedString = scannedData;
         } catch (JSONException e) {
-            int indexComma = -1;
-            String newJSONString = "";
-            for (int i = 0; i < scannedData.length(); i++) {
-                Character charac = scannedData.charAt(i);
-                Character comma = new Character(',');
-                if (charac.equals(comma)) {
-                    indexComma++;
-                    if (indexComma % 2 == 0) {
-                        newJSONString += ":";
-                    } else {
-                        newJSONString += charac;
-                    }
-                } else {
-                    newJSONString += charac;
-                }
-            }
-            preparedString = newJSONString;
+            preparedString = scannedData.replaceFirst(",", ":");
             System.out.println("TEST preparedString "+preparedString);
         }
         return preparedString;
