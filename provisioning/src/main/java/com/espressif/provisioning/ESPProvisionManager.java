@@ -257,6 +257,10 @@ public class ESPProvisionManager {
                 if (!TextUtils.isEmpty(scannedData) && !isScanned) {
 
                     Log.d(TAG, "QR Code Data : " + scannedData);
+                    System.out.println("TEST scannedData : "+scannedData);
+
+                    scannedData = prepareScannedData(scannedData);
+                    System.out.println("TEST 2 scannedData : "+scannedData);
 
                     try {
                         JSONObject jsonObject = new JSONObject(scannedData);
@@ -336,6 +340,34 @@ public class ESPProvisionManager {
                 }
             }
         });
+    }
+
+    public static String prepareScannedData(String scannedData) {
+        String preparedString = null;
+        try {
+            jsonObject = new JSONObject(scannedData);
+            preparedString = scannedData;
+        } catch (JSONException e) {
+            int indexComma = -1;
+            String newJSONString = "";
+            for (int i = 0; i < scannedData.length(); i++) {
+                Character charac = scannedData.charAt(i);
+                Character comma = new Character(',');
+                if (charac.equals(comma)) {
+                    indexComma++;
+                    if (indexComma % 2 == 0) {
+                        newJSONString += ":";
+                    } else {
+                        newJSONString += charac;
+                    }
+                } else {
+                    newJSONString += charac;
+                }
+            }
+            preparedString = newJSONString;
+            System.out.println("TEST preparedString "+preparedString);
+        }
+        return preparedString;
     }
 
     /**
