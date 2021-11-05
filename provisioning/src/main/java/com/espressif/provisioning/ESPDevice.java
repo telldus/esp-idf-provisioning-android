@@ -799,7 +799,7 @@ public class ESPDevice {
                     if (provisionListener != null) {
                         provisionListener.deviceProvisioningSuccess();
                     }
-                    // session = null;
+                    session = null;
                     disableOnlyWifiNetwork();
 
                 } else if (wifiStationState == WifiConstants.WifiStationState.Disconnected) {
