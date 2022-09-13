@@ -303,7 +303,7 @@ public class ESPProvisionManager {
                             }
                         } else {
                             Log.e(TAG, "Transport is not available in QR code data");
-                            qrCodeScanListener.onFailure(new RuntimeException("QR code is not valid"));
+                            qrCodeScanListener.onFailure(new RuntimeException("QR code is not valid"), scannedData);
                             return;
                         }
 
@@ -331,10 +331,10 @@ public class ESPProvisionManager {
                     } catch (JSONException e) {
 
                         e.printStackTrace();
-                        qrCodeScanListener.onFailure(new RuntimeException("QR code is not valid"));
+                        qrCodeScanListener.onFailure(new RuntimeException("QR code is not valid"), scannedData);
                     }
                 } else {
-                    qrCodeScanListener.onFailure(new RuntimeException("QR code is not valid"));
+                    qrCodeScanListener.onFailure(new RuntimeException("QR code is not valid"), scannedData);
                 }
             }
         });
